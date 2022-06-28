@@ -17,8 +17,43 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
+
+func greeting(name string) {
+	fmt.Println("Hello,", name)
+}
+
+func returnAMessage() string {
+	return "I am a message!"
+}
+
+func add(a, b, c int) int {
+	return a + b + c
+}
+
+func anyNumber() int {
+	r := rand.New(rand.NewSource(99))
+	return r.Intn(5000)
+}
+
+func anyTwoNumbers() (int, int) {
+	r := rand.New(rand.NewSource(99))
+	return r.Intn(5000), r.Intn(5000)
+}
 
 func main() {
+	greeting("Bob")
+	fmt.Println(returnAMessage())
+
+	theSum := add(1, 2, 3)
+	fmt.Println(theSum)
+
+	a := anyNumber()
+	b, c := anyTwoNumbers()
+
+	fmt.Println("The sum of all three numbers:", add(a, b, c))
 
 }
