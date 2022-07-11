@@ -19,8 +19,43 @@
 
 package main
 
-import "fmt"
+import "time"
+
+const (
+	Available = true
+	OnLoan    = false
+)
+
+type CheckoutStatus bool
+
+type LoanAudit struct {
+	checkOut time.Time
+	checkIn  time.Time
+}
+
+type Book struct {
+	name   string
+	status CheckoutStatus
+	copies int
+	loaned int
+}
+
+type Patron struct {
+	name  string
+	books map[string]LoanAudit
+}
+
+type Library struct {
+	patrons map[string]Patron
+	books   map[string]Book
+}
 
 func main() {
+	//* Perform the following:
+	//  - Add at least 4 books and at least 3 members to the library
 
+	//  - Check out a book
+	//  - Check in a book
+	//  - Print out initial library information, and after each change
+	//* There must only ever be one copy of the library in memory at any time
 }
