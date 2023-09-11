@@ -13,4 +13,8 @@ func compute(lhs, rhs int, op func(int, int) int) int {
 
 func main() {
 	fmt.Println("10 + 2 =", compute(10, 2, add))
+
+	fmt.Println("10 - 2 =", compute(10, 2, func(lhs, rhs int) int {
+		return lhs - rhs
+	}))
 }
