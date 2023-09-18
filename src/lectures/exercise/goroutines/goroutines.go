@@ -28,7 +28,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"os"
 	"strconv"
 	"time"
@@ -36,4 +35,49 @@ import (
 
 func main() {
 	files := []string{"num1.txt", "num2.txt", "num3.txt", "num4.txt", "num5.txt"}
+
+	//* Sum the numbers in each file noted in the main() function
+
+	var grandTotal int
+
+	sumFiles := func(fileName string) {
+		file, err := os.Open(fileName)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		defer file.Close()
+
+		var total int
+
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			num, err := strconv.Atoi(scanner.Text())
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+			total += num
+		}
+
+		if err := scanner.Err(); err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		fmt.Printf("Total for %s: %d\n", fileName, total)
+
+		grandTotal += total
+	}
+
+	for i := 0; i < len(files); i++ {
+		go sumFiles(files[i])
+	}
+
+	time.Sleep(1000 * time.Millisecond)
+	fmt.Printf("Grand total: %d\n", grandTotal)
+
+	if grandTotal != 4103109 {
+		fmt.Println("Incorrect grand total")
+	}
 }
