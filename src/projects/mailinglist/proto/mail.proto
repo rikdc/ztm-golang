@@ -12,7 +12,7 @@ message EmailEntry {
 
 message CreateEmailRequest { string email_addr = 1; }
 message GetEmailRequest { string email_addr = 1; }
-message UpdatedEmailRequest { EmailEntry emil_entry = 1; }
+message UpdateEmailRequest { EmailEntry email_entry = 1; }
 message DeleteEmailRequest { string email_addr = 1; }
 message GetEmailBatchRequest {
 	int32 page = 1;
@@ -25,7 +25,7 @@ message GetEmailBatchResponse { repeated EmailEntry email_entries = 1; }
 service MailingListService {
 	rpc CreateEmail(CreateEmailRequest) returns (EmailResponse) {}
 	rpc GetEmail(GetEmailRequest) returns (EmailResponse) {}
-	rpc UpdateEmail(UpdatedEmailRequest) returns (EmailResponse) {}
+	rpc UpdateEmail(UpdateEmailRequest) returns (EmailResponse) {}
 	rpc DeleteEmail(DeleteEmailRequest) returns (EmailResponse) {}
-	rpc GetEmailBatch(GetEmailBatchRequest) returns (EmailResponse) {}
+	rpc GetEmailBatch(GetEmailBatchRequest) returns (GetEmailBatchResponse) {}
 }
